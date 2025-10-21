@@ -1,0 +1,139 @@
+<!doctype html>
+
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Entendendo o TDAH — Ebook</title>
+  <meta name="description" content="E-book simples sobre os sintomas do TDAH. Pagamento via Pix e entrega por WhatsApp." />
+  <style>
+    :root{--bg:#f6fbff;--card:#ffffff;--accent:#2b7be4;--accent-2:#0b63d4;--muted:#667085}
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; margin:0;background:var(--bg);color:#102a43}
+    .container{max-width:980px;margin:36px auto;padding:20px}
+    header{display:flex;gap:20px;align-items:center}
+    .cover{width:220px;height:300px;background:linear-gradient(180deg,var(--accent),var(--accent-2));border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px}
+    .info{flex:1}
+    h1{margin:0 0 8px;font-size:28px}
+    p.lead{margin:0 0 12px;color:var(--muted)}
+    .price{font-size:26px;font-weight:700;color:var(--accent-2);margin-bottom:12px}
+    .btn{display:inline-block;padding:12px 18px;border-radius:8px;border:none;background:var(--accent);color:white;font-weight:700;text-decoration:none;cursor:pointer}
+    .btn.secondary{background:#fff;border:1px solid #e6eefc;color:var(--accent)}.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:24px}
+.card{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(16,42,67,0.06)}
+
+footer{margin-top:28px;text-align:center;color:var(--muted);font-size:14px}
+
+/* Modal */
+.modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.5);display:none;align-items:center;justify-content:center;padding:20px}
+.modal{background:var(--card);max-width:520px;width:100%;padding:18px;border-radius:12px}
+.modal h3{margin-top:0}
+.qr{width:200px;height:200px;background:#f3f6fb;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:8px auto}
+.field{background:#f7fbff;padding:10px;border-radius:8px;margin:8px 0;word-break:break-all}
+.actions{display:flex;gap:8px;justify-content:center;margin-top:12px}
+
+.copy-btn{border:0;padding:8px 10px;border-radius:8px;background:var(--accent);color:white;cursor:pointer}
+
+@media (max-width:640px){header{flex-direction:column;align-items:stretch}.cover{width:100%;height:220px}}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="cover">Capa do E-book<br/><small style="opacity:.9;font-weight:600">TDAH</small></div>
+      <div class="info">
+        <h1>Entendendo o TDAH — Sintomas</h1>
+        <p class="lead">Um guia simples e direto para identificar os sintomas do TDAH. Ideal para pais, professores e interessados.</p>
+        <div class="price">R$ 19,90</div>
+        <div>
+          <button class="btn" id="buyPix">Pagar com Pix</button>
+          <a class="btn secondary" id="buyWhats" href="#">Pagar via WhatsApp</a>
+        </div>
+      </div>
+    </header><section class="features">
+  <div class="card">
+    <h4>O que está incluso</h4>
+    <ul>
+      <li>E-book em PDF (download imediato após confirmação)</li>
+      <li>Guia simples e linguagem acessível</li>
+      <li>Suporte via WhatsApp</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Como funciona (Pix)</h4>
+    <p class="lead">Ao clicar em <strong>"Pagar com Pix"</strong>, você verá o QR Code e a chave Pix. Faça o pagamento com seu app bancário. Depois, confirme enviando o comprovante via WhatsApp — o PDF será enviado automaticamente (ou manualmente, dependendo da sua configuração).</p>
+  </div>
+  <div class="card">
+    <h4>Como funciona (WhatsApp)</h4>
+    <p class="lead">Se preferir, clique em <strong>"Pagar via WhatsApp"</strong> para abrir uma conversa com mensagens pré-formatadas. Você receberá instruções e o link para pagamento via Pix diretamente no chat.</p>
+  </div>
+</section>
+
+<section style="margin-top:20px">
+  <div class="card">
+    <h3>Depoimentos</h3>
+    <p>"Muito claro e útil — ajudou minha família a entender melhor." — Ana</p>
+    <p>"Conteúdo objetivo e direto. Recomendo." — João</p>
+  </div>
+</section>
+
+<footer>
+  <small>© 2025 — Entendendo o TDAH. Todas as informações são para fins informativos.</small>
+</footer>
+
+  </div>  <!-- Modal Pix -->  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <h3>Pagar com Pix</h3>
+      <p>Use o QR Code abaixo no seu app bancário ou copie a chave Pix.</p><div class="qr" id="qrImage">QR CODE</div>
+  <div class="field" id="pixKey">CHAVE_PIX_AQUI</div>
+
+  <div style="text-align:center;margin-top:8px">
+    <button class="copy-btn" id="copyPix">Copiar chave Pix</button>
+    <button class="copy-btn" id="iPaid" style="background:#28a745;">Já paguei (Enviar WhatsApp)</button>
+  </div>
+
+  <p style="font-size:13px;color:#6b7280;margin-top:10px">Após confirmar o pagamento, envie o comprovante pelo WhatsApp para receber o e-book automaticamente.</p>
+</div>
+
+  </div>  <script>
+    // --- CONFIGURE AQUI ---
+    const PIX_KEY = 'insira_sua_chave_pix_aqui'; // substituir com sua chave Pix (e.g. cpf/cnpj/email/telefone/txid)
+    const PIX_QR_URL = ''; // opcional: link para imagem do QR Code (deixe vazio para usar o placeholder)
+    const SELLER_WA = '5591999999999'; // número do WhatsApp do vendedor com código do país e DDD (ex: 5591999999999)
+    const SELLER_PRICE = 'R$ 19,90';
+    // ----------------------
+
+    const modal = document.getElementById('modal');
+    const buyPix = document.getElementById('buyPix');
+    const buyWhats = document.getElementById('buyWhats');
+    const pixKeyEl = document.getElementById('pixKey');
+    const qrImage = document.getElementById('qrImage');
+
+    pixKeyEl.textContent = PIX_KEY || 'CHAVE_PIX_AQUI';
+    if(PIX_QR_URL){
+      qrImage.innerHTML = '<img src="'+PIX_QR_URL+'" alt="QR Pix" style="max-width:100%;height:auto;border-radius:8px" />';
+    }
+
+    buyPix.addEventListener('click', ()=>{ modal.style.display='flex'; });
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.style.display='none'; });
+
+    document.getElementById('copyPix').addEventListener('click', ()=>{
+      navigator.clipboard.writeText(PIX_KEY).then(()=>{ alert('Chave Pix copiada!'); }).catch(()=>{ alert('Não foi possível copiar.'); });
+    });
+
+    // Quando usuário clica em "Já paguei" — abre WhatsApp com mensagem e anexa preço e instrução
+    document.getElementById('iPaid').addEventListener('click', ()=>{
+      const msg = encodeURIComponent('Olá, já realizei o pagamento do e-book "Entendendo o TDAH" no valor de '+SELLER_PRICE+'. Envio aqui o comprovante. Nome: ');
+      const waUrl = 'https://wa.me/'+SELLER_WA+'?text='+msg;
+      window.open(waUrl, '_blank');
+    });
+
+    // Botão WhatsApp direto (inicia conversa com mensagem pronta)
+    buyWhats.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const msg = encodeURIComponent('Olá! Quero comprar o e-book "Entendendo o TDAH". Como faço o pagamento via Pix?');
+      const waUrl = 'https://wa.me/'+SELLER_WA+'?text='+msg;
+      window.open(waUrl, '_blank');
+    });
+  </script></body>
+</html>
